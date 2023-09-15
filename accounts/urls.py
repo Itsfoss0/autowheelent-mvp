@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 """
 Urls related to user accounts
 """
