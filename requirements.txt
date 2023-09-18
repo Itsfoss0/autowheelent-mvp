@@ -1,0 +1,3 @@
+django
+django-allauth
+django-ckeditor
