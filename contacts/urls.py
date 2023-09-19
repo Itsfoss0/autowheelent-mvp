@@ -1,13 +1,6 @@
-#!/usr/bin/env python3
-
-"""
-URLs related to contacts
-"""
-
 from django.urls import path
-from contacts.views import contacts
-
+from . import views
 
 urlpatterns = [
-    path('', contacts, name="contacts")
+    path('inquiry', views.inquiry, name='inquiry'),
 ]

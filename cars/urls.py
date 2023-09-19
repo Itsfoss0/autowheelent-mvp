@@ -1,13 +1,8 @@
-#!/usr/bin/env python3
-
-"""
-URLs related to cars
-"""
-
 from django.urls import path
-from cars.views import cars
-
+from . import views
 
 urlpatterns = [
-    path('', cars, name='cars')
+    path('', views.cars, name='cars'),
+    path('<int:id>', views.car_detail, name='car_detail'),
+    path('search', views.search, name='search'),
 ]
