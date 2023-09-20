@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-f*_zchuyu-djb=sf95z#fbgs-(i=y4ai(aff$9-o7e5l*cxye#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 LOGIN_REDIRECT_URL = 'dashboard'
 
@@ -136,6 +136,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+SITE_ID = 2
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
