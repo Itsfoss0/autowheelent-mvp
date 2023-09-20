@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services | Autowheelrent</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <!-- Navbar -->
+    <nav class="bg-white p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <a class="text-2xl font-semibold text-blue-500" href="{% url 'home' %}">Autowheelrent</a>
+            <div class="md:flex space-x-4 mt-4 md:mt-0">
+                <a class="text-gray-600 hover:text-gray-900" href="{% url 'login' %}">Login</a>
+                <a class="text-gray-600 hover:text-gray-900" href="{% url 'home' %}">Home</a>
+                <a class="text-gray-600 hover:text-gray-900" href="{% url 'about' %}">About</a>
+                <a class="text-gray-600 hover:text-gray-900" href="{% url 'services' %}">Services</a>
+                <a class="text-gray-600 hover:text-gray-900" href="{% url 'contact' %}">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Services Section -->
+    <section class="py-12">
+        <div class="container mx-auto">
+            <h1 class="text-3xl font-semibold text-center mb-6">Our Services</h1>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service Card 1 -->
+                <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1">
+                    <div class="p-6">
+                        <h2 class="text-xl font-semibold mb-2">Car Rentals</h2>
+                        <p class="text-gray-600">Explore our wide range of rental cars for all your travel needs. From compact cars to SUVs, we have it all.</p>
+                    </div>
+                </div>
+
+                <!-- Service Card 2 -->
+                <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1">
+                    <div class="p-6">
+                        <h2 class="text-xl font-semibold mb-2">24/7 Support</h2>
+                        <p class="text-gray-600">Our dedicated support team is available around the clock to assist you with any inquiries or issues.</p>
+                    </div>
+                </div>
+
+                <!-- Service Card 3 -->
+                <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1">
+                    <div class="p-6">
+                        <h2 class="text-xl font-semibold mb-2">Easy Booking</h2>
+                        <p class="text-gray-600">Booking a car has never been easier. Our user-friendly platform ensures a hassle-free experience.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="fixed bottom-0 bg-gray-800 text-white text-center py-4 w-full">
+        <div class="container mx-auto">
+            <p>&copy; Autowheelrent 2023</p>
+        </div>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.js"></script>
+</body>
+</html>
