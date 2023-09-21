@@ -52,9 +52,11 @@ def register(request):
 
 @login_required(login_url = 'login')
 def dashboard(request):
+    user_name = request.user.first_name
     user_inquiry = Contact.objects.order_by('-created_date').filter(user_id=request.user.id)
     data = {
-        'inquiries': user_inquiry
+        'inquiries': user_inquiry,
+        'user_name': user_name
     }
     return render(request, 'accounts/dashboard.html', data)
 

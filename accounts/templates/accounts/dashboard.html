@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Autowheelrent</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</body>
+</head>
+<body class="bg-gray-100">
+    <header class="bg-blue-500 py-4">
+        <div class="container mx-auto flex justify-between items-center text-white px-4">
+            <h1 class="text-2xl font-semibold">Howdy! {{ user_name }} </h1>
+            <div class="relative">
+                <a href="{% url 'logout' %}" class="flex items-center justify-center h-10 w-10 rounded-full bg-blue-300 text-white font-semibold text-lg">
+                    {{ user_name|first|upper }}
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto py-8">
+        <div class="grid grid-cols-2 gap-4">
+            <div class="bg-white p-4 rounded-lg shadow">
+                <!-- Dashboard content goes here -->
+                <h2 class="text-xl font-semibold mb-4">Cars</h2>
+                <p>Your Cars will be listed here</p>
+            </div>
+            <div class="bg-white p-4 rounded-lg shadow">
+                <!-- Contact Inquiries Section -->
+                <h2 class="text-xl font-semibold mb-4">Contact Inquiries</h2>
+                <table class="w-full border-collapse">
+                    <thead>
+                        <tr>
+                            <th class="py-2 px-4 bg-gray-200 border text-left">First Name</th>
+                            <th class="py-2 px-4 bg-gray-200 border text-left">Last Name</th>
+                            <th class="py-2 px-4 bg-gray-200 border text-left">Car Title</th>
+                            <th class="py-2 px-4 bg-gray-200 border text-left">City</th>
+                            <th class="py-2 px-4 bg-gray-200 border text-left">Email</th>
+                            <th class="py-2 px-4 bg-gray-200 border text-left">Phone</th>
+                            <th class="py-2 px-4 bg-gray-200 border text-left">Message</th>
+                            <th class="py-2 px-4 bg-gray-200 border text-left">Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for inquiry in data %}
+                            <tr>
+                                <td class="py-2 px-4 border">{{ inquiry.first_name }}</td>
+                                <td class="py-2 px-4 border">{{ inquiry.last_name }}</td>
+                                <td class="py-2 px-4 border">{{ inquiry.car_title }}</td>
+                                <td class="py-2 px-4 border">{{ inquiry.city }}</td>
+                                <td class="py-2 px-4 border">{{ inquiry.email }}</td>
+                                <td class="py-2 px-4 border">{{ inquiry.phone }}</td>
+                                <td class="py-2 px-4 border">{{ inquiry.message }}</td>
+                                <td class="py-2 px-4 border">{{ inquiry.created_date }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+    <footer class="fixed bottom-0 left-0 w-full bg-gray-200 py-4">
+        <div class="container mx-auto text-center">
+            <p>&copy; Autowheelrent 2023</p>
+        </div>
+    </footer>
+</body>
+</html>
