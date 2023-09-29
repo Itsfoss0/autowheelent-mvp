@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ single_car.car_title }}</title>
+    <!-- Add Tailwind CSS from CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+
+<!-- Sub banner start -->
+<div class="bg-cover bg-center relative py-32" style="background-image: url('your-image-url.jpg');">
+    <div class="container mx-auto text-center">
+        <h1 class="text-4xl font-bold text-white">{{ single_car.car_title }}</h1>
+        <ul class="text-gray-400 text-sm">
+            <li><a href="{% url 'home' %}" class="hover:text-blue-500">Home</a></li>
+            <li class="text-blue-500"> {{ single_car.car_title }}</li>
+        </ul>
+    </div>
+</div>
+<!-- Sub Banner end -->
+
+<!-- Car details page start -->
+<div class="container mx-auto mt-8">
+    <div class="grid grid-cols-12 gap-4">
+        <div class="col-span-8">
+            <div class="bg-white rounded-lg shadow-md hover:shadow-lg mb-8 p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <!-- {% include 'include/messages.html' %} -->
+                    <div>
+                        <h1 class="text-2xl font-semibold">{{ single_car.car_title }}</h1>
+                        <p class="text-gray-600">
+                            <i class="flaticon-pin"></i> {{ single_car.state }}, {{ single_car.city }}
+                        </p>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-semibold">
+                            <span class="text-2xl text-red-500">${{ single_car.price }} USD per day</span>
+                        </h1>
+                    </div>
+                </div>
+                <div id="carDetailsSlider" class="carousel car-details-sliders slide mb-6">
+                    <div class="carousel-inner">
+                        <div class="active item carousel-item" data-slide-number="0">
+                            <img src="{{ single_car.car_photo.url }}" class="img-fluid" alt="slider-car">
+                        </div>
+                        {% if single_car.car_photo_1 %}
+                            <div class="item carousel-item" data-slide-number="1">
+                                <img src="{{ single_car.car_photo_1.url }}" class="img-fluid" alt="slider-car">
+                            </div>
+                        {% endif %}
+                        {% if single_car.car_photo_2 %}
+                            <div class="item carousel-item" data-slide-number="2">
+                                <img src="{{ single_car.car_photo_2.url }}" class="img-fluid" alt="slider-car">
+                            </div>
+                        {% endif %}
+                        {% if single_car.car_photo_3 %}
+                            <div class="item carousel-item" data-slide-number="4">
+                                <img src="{{ single_car.car_photo_3.url }}" class="img-fluid" alt="slider-car">
+                            </div>
+                        {% endif %}
+                        {% if single_car.car_photo_4 %}
+                            <div class="item carousel-item" data-slide-number="5">
+                                <img src="{{ single_car.car_photo_4.url }}" class="img-fluid" alt="slider-car">
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="carousel-indicators-section clearfix">
+                        <ul class="carousel-indicators car-properties list-inline nav nav-justified">
+                            <li class="list-inline-item active">
+                                <a id="carousel-selector-0" class="selected" data-slide-to="0" data-target="#carDetailsSlider">
+                                    <img src="{{ single_car.car_photo.url }}" class="img-fluid" alt="small-car">
+                                </a>
+                            </li>
+                            {% if single_car.car_photo_1 %}
+                                <li class="list-inline-item">
+                                    <a id="carousel-selector-1" data-slide-to="1" data-target="#carDetailsSlider">
+                                        <img src="{{ single_car.car_photo_1.url }}" class="img-fluid" alt="small-car">
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% if single_car.car_photo_2 %}
+                                <li class="list-inline-item">
+                                    <a id="carousel-selector-2" data-slide-to="2" data-target="#carDetailsSlider">
+                                        <img src="{{ single_car.car_photo_2.url }}" class="img-fluid" alt="small-car">
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% if single_car.car_photo_3 %}
+                                <li class="list-inline-item">
+                                    <a id="carousel-selector-3" data-slide-to="3" data-target="#carDetailsSlider">
+                                        <img src="{{ single_car.car_photo_3.url }}" class="img-fluid" alt="small-car">
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% if single_car.car_photo_4 %}
+                                <li class="list-inline-item">
+                                    <a id="carousel-selector-4" data-slide-to="4" data-target="#carDetailsSlider">
+                                        <img src="{{ single_car.car_photo_4.url }}" class="img-fluid" alt="small-car">
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="tabbing tabbing-box mb-6">
+                    <ul class="nav nav-tabs" id="carTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active show" id="one-tab" data-toggle="tab" href="#one" role="tab" aria-controls="one" aria-selected="false">Vehicle overview</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="two-tab" data-toggle="tab" href="#two" role="tab" aria-controls="two" aria-selected="false">Features</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="carTabContent">
+                        <div class="tab-pane fade active show" id="one" role="tabpanel" aria-labelledby="one-tab">
+                            <div class="car-description mb-6">
+                                <h3 class="text-xl font-semibold">
+                                    Description
+                                </h3>
+                                <p>
+                                    {{ single_car.description | safe }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="two" role="tabpanel" aria-labelledby="two-tab">
+                            <div class="features-info mb-6">
+                                <h3 class="text-xl font-semibold">Features</h3>
+                                <ul class="list-disc list-inside">
+                                    <li>
+                                        {{ single_car.features }}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-span-4">
+            <!-- Sidebar content goes here -->
+        </div>
+    </div>
+</div>
+<!-- Car details page end -->
+
+</body>
+</html>
