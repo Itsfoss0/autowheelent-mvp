@@ -14,6 +14,14 @@ class Car(models.Model):
     fuel_type = models.CharField(max_length=30)
     is_featured = models.BooleanField()
     created_date = models.DateTimeField(auto_now_add=True)
+    car_image = models.ImageField(verbose_name='Car Image')
 
     def create(self):
         self.save()
+
+    def __str__(self):
+        """
+        Representing the Car
+        On the admin UI
+        """
+        return self.car_title
