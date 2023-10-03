@@ -5,7 +5,7 @@ from django.utils.html import format_html
 
 class CarAdmin(admin.ModelAdmin):
     def thumbnail(self, object):
-        return format_html('<img src="{}" width="40" style="border-radius: 50px" />'.format(object.car_photo.url))
+        return format_html('<img src="{}" width="40" style="border-radius: 50px" />'.format(object.car_image.url))
 
     thumbnail.short_description = 'Car Image'
     list_display = ('id', 'thumbnail',  'car_title', 'city', 'color', 'model', 'year', 'body_style', 'fuel_type', 'is_featured')

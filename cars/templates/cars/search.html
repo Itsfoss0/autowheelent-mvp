@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <!-- Add Tailwind CSS from CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+
+<!-- Banner start -->
+<div class="bg-cover bg-center relative py-32" style="background-image: url('your-image-url.jpg');">
+    <div class="container mx-auto text-center">
+        <h1 class="text-4xl font-bold text-white">Search Results</h1>
+        <ul class="text-gray-400 text-sm">
+            <li><a href="{% url 'home' %}" class="hover:text-blue-500">Home</a></li>
+            <li class="text-blue-500"> Search</li>
+        </ul>
+    </div>
+</div>
+<!-- Banner end -->
+
+<!-- Search box 3 start -->
+<div class="bg-active">
+    <div class="container mx-auto py-8">
+        <div class="bg-white rounded-lg shadow-md hover:shadow-lg p-6">
+            <form method="GET" action="{% url 'search' %}">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <div class="form-group">
+                        <select class="selectpicker search-fields p-2 rounded border border-gray-300" name="model">
+                            <option disabled="disabled" selected="selected">Select Model</option>
+                            {% for model in model_search %}
+                            <option value="{{ model }}">{{ model }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <select class="selectpicker search-fields p-2 rounded border border-gray-300" name="city">
+                            <option disabled="disabled" selected="selected">Select Location</option>
+                            {% for city in city_search %}
+                            <option value="{{ city }}">{{ city }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <select class="selectpicker search-fields p-2 rounded border border-gray-300" name="year">
+                            <option disabled="disabled" selected="selected">Select Year</option>
+                            {% for year in year_search %}
+                            <option value="{{ year }}">{{ year }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <select class="selectpicker search-fields p-2 rounded border border-gray-300" name="body_style">
+                            <option disabled="disabled" selected="selected">Select Type Of Car</option>
+                            {% for body_style in body_style_search %}
+                            <option value="{{ body_style }}">{{ body_style }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <div class="form-group">
+                        <select class="selectpicker search-fields p-2 rounded border border-gray-300" name="transmission">
+                            <option disabled="disabled" selected="selected">Transmission</option>
+                            {% for transmission in transmission_search %}
+                            <option value="{{ transmission }}">{{ transmission }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <div class="range-slider">
+                            <div data-min="0" data-max="300000" data-unit="USD" data-min-name="min_price" data-max-name="max_price" class="range-slider-ui ui-slider" aria-disabled="false"></div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-block button-theme btn-md bg-red-500 text-white font-bold hover:bg-red-600 p-2 rounded">
+                            <i class="fa fa-search"></i>Find
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Search box 3 end -->
+
+<!-- Featured car start -->
+<div class="container mx-auto mt-8">
+    <h1 class="text-3xl font-semibold mb-4">Here's your <span class="text-red-500">Cars</span></h1>
+    <p class="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {% for car in cars %}
+        <div class="bg-white rounded-lg shadow-md hover:shadow-lg">
+            <a href="{% url 'car_detail' car.id %}" class="block">
+                <div class="relative">
+                    <div class="tag absolute top-0 left-0 bg-red-500 text-white px-2 py-1">
+                        For Sale
+                    </div>
+                    <img class="w-full" src="{{ car.car_photo.url }}" alt="car">
+                </div>
+            </a>
+            <div class="p-4">
+                <h2 class="text-xl font-semibold">
+                    <a href="{% url 'car_detail' car.id %}">{{ car.car_title }}</a>
+                </h2>
+                <p class="text-gray-600">
+                    <i class="flaticon-pin"></i> {{ car.state }}, {{ car.city }}
+                </p>
+                <div class="flex items-center justify-between mt-4">
+                    <div>
+                        <ul class="list-disc list-inside">
+                            <li>
+                                <span><i class="flaticon-way"></i></span>{{ car.miles | intcomma }} km
+                            </li>
+                            <li>
+                                <span><i class="flaticon-calendar-1"></i></span>{{ car.year }}
+                            </li>
+                            <li>
+                                <span><i class="flaticon-manual-transmission"></i></span>{{ car.transmission }}
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="text-lg font-semibold text-red-500">${{ car.price | intcomma }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<!-- Featured car end -->
+
+</body>
+</html>
