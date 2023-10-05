@@ -15,6 +15,7 @@ class Car(models.Model):
     is_featured = models.BooleanField()
     created_date = models.DateTimeField(auto_now_add=True)
     car_image = models.ImageField(verbose_name='Car Image')
+    price = models.IntegerField(verbose_name='Price per day')
 
     def create(self):
         self.save()
