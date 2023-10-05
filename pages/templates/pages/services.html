@@ -10,9 +10,13 @@
     <!-- Navbar -->
     <nav class="bg-white p-4 shadow-lg">
         <div class="container mx-auto flex justify-between items-center">
-            <a class="text-2xl font-semibold text-blue-500" href="{% url 'home' %}">Autowheelrent</a>
+            <a class="text-2xl font-semibold text-blue-500" href="#">Autowheelrent</a>
             <div class="md:flex space-x-4 mt-4 md:mt-0">
-                <a class="text-gray-600 hover:text-gray-900" href="{% url 'login' %}">Login</a>
+                {% if not user.is_authenticated%}
+                    <a class="text-gray-600 hover:text-gray-900" href="{% url 'login' %}">Login</a>
+                {% else %}
+                    <a class="text-gray-600 hover:text-gray-900" href="{% url 'dashboard' %}">Dashboard</a>
+                {% endif %}
                 <a class="text-gray-600 hover:text-gray-900" href="{% url 'home' %}">Home</a>
                 <a class="text-gray-600 hover:text-gray-900" href="{% url 'about' %}">About</a>
                 <a class="text-gray-600 hover:text-gray-900" href="{% url 'services' %}">Services</a>
