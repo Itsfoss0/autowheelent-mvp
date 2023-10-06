@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages, auth
 from django.contrib.auth.models import User
 from contacts.models import Contact
+from booking.models import Booking
 from django.contrib.auth.decorators import login_required
 
 def login(request):
@@ -54,9 +55,11 @@ def register(request):
 def dashboard(request):
     user_name = request.user.first_name
     user_inquiry = Contact.objects.order_by('-created_date').filter(user_id=request.user.id)
+    bookings = Booking.objects.filter(user=request.user)
     data = {
         'inquiries': user_inquiry,
-        'user_name': user_name
+        'user_name': user_name,
+        'bookings': bookings
     }
     return render(request, 'accounts/dashboard.html', data)
 

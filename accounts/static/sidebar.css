@@ -1,0 +1,10 @@
+.sidebar {
+    width: 15%;
+    position: fixed;
+    height: 100%;
+}
+
+.content {
+    margin-left: 15%;
+    padding: 15%;
+}
