@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autowheelrent | Booking</title>
+    <!-- Include Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <nav class="bg-white p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <a class="text-2xl font-semibold text-blue-500" href="#">Autowheelrent</a>
+            <div class="md:flex space-x-4 mt-4 md:mt-0">
+                {% if not user.is_authenticated%}
+                    <a class="text-gray-600 hover:text-gray-900" href="{% url 'login' %}">Login</a>
+                {% else %}
+                    <a class="text-gray-600 hover:text-gray-900" href="{% url 'dashboard' %}">Dashboard</a>
+                {% endif %}
+                <a class="text-gray-600 hover:text-gray-900" href="{% url 'home' %}">Home</a>
+                <a class="text-gray-600 hover:text-gray-900" href="{% url 'about' %}">About</a>
+                <a class="text-gray-600 hover:text-gray-900" href="{% url 'services' %}">Services</a>
+                <a class="text-gray-600 hover:text-gray-900" href="{% url 'contact' %}">Contact</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container mx-auto mt-8 p-4">
+        <h1 class="text-2xl font-semibold mb-4">Book a Car</h1>
+        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" method="post">
+            {% csrf_token %}
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="car">
+                    Select a Car
+                </label>
+                <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="car" name="car">
+                    {% for car in cars%}
+                    <option value="{{ car.id }}">{{ car.car_title }}</option>
+                    {% endfor %}    
+                </select>
+            </div>
+
+            <!-- Pickup Location -->
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="pickup_location">
+                    Pickup Location
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="pickup_location" type="text" placeholder="Enter pickup location" name="pickup_location">
+            </div>
+
+            <!-- Drop-off Location -->
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="dropoff_location">
+                    Drop-off Location
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="dropoff_location" type="text" placeholder="Enter drop-off location" name="dropoff_location">
+            </div>
+
+            <!-- Booking Date -->
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="booking_date">
+                    Booking Date
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="booking_date" type="date" name="booking_date">
+            </div>
+
+            <!-- Submit Button -->
+            <div class="mb-6">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                    Book Now
+                </button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

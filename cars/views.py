@@ -1,10 +1,10 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 from .models import Car
-from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.core.paginator import Paginator
 
 def cars(request):
     cars = Car.objects.order_by('-created_date')
-    paginator = Paginator(cars, 2)
+    paginator = Paginator(cars, 3)
     page = request.GET.get('page')
     paged_cars = paginator.get_page(page)
 
@@ -12,6 +12,7 @@ def cars(request):
     city_search = Car.objects.values_list('city', flat=True).distinct()
     year_search = Car.objects.values_list('year', flat=True).distinct()
     body_style_search = Car.objects.values_list('body_style', flat=True).distinct()
+
     data = {
         'cars': paged_cars,
         'model_search': model_search,
@@ -20,6 +21,7 @@ def cars(request):
         'body_style_search': body_style_search,
     }
     return render(request, 'cars/cars.html', data)
+
 
 def car_detail(request, id):
     single_car = get_object_or_404(Car, pk=id)

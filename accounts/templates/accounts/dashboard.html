@@ -1,16 +1,28 @@
 <!DOCTYPE html>
+{%load static%}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | Autowheelrent</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-</body>
+    <link rel="stylesheet" type="text/css" href="{% static 'sidebar.css' %}">
+    <style>
+    .sidebar {
+    width: 15%;
+    position: fixed;
+    height: 100%;
+    }
+    .content {
+        margin-right: 0%;
+        margin-left: 15%;
+        padding-left: 1%;
+    }
+    </style>
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-100 flex-grow">
     <header class="bg-blue-500 py-4">
         <div class="container mx-auto flex justify-between items-center text-white px-4">
-            <h1 class="text-2xl font-semibold">Howdy! {{ user_name }} </h1>
             <div class="relative">
                 <a href="{% url 'logout' %}" class="flex items-center justify-center h-10 w-10 rounded-full bg-blue-300 text-white font-semibold text-lg">
                     {{ user_name|first|upper }}
@@ -18,52 +30,59 @@
             </div>
         </div>
     </header>
-
-    <main class="container mx-auto py-8">
-        <div class="grid grid-cols-2 gap-4">
-            <div class="bg-white p-4 rounded-lg shadow">
-                <!-- Dashboard content goes here -->
-                <h2 class="text-xl font-semibold mb-4">Cars</h2>
-                <p>Your Cars will be listed here</p>
-            </div>
-            <div class="bg-white p-4 rounded-lg shadow">
-                <!-- Contact Inquiries Section -->
-                <h2 class="text-xl font-semibold mb-4">Contact Inquiries</h2>
-                <table class="w-full border-collapse">
-                    <thead>
-                        <tr>
-                            <th class="py-2 px-4 bg-gray-200 border text-left">First Name</th>
-                            <th class="py-2 px-4 bg-gray-200 border text-left">Last Name</th>
-                            <th class="py-2 px-4 bg-gray-200 border text-left">Car Title</th>
-                            <th class="py-2 px-4 bg-gray-200 border text-left">City</th>
-                            <th class="py-2 px-4 bg-gray-200 border text-left">Email</th>
-                            <th class="py-2 px-4 bg-gray-200 border text-left">Phone</th>
-                            <th class="py-2 px-4 bg-gray-200 border text-left">Message</th>
-                            <th class="py-2 px-4 bg-gray-200 border text-left">Date</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for inquiry in data %}
-                            <tr>
-                                <td class="py-2 px-4 border">{{ inquiry.first_name }}</td>
-                                <td class="py-2 px-4 border">{{ inquiry.last_name }}</td>
-                                <td class="py-2 px-4 border">{{ inquiry.car_title }}</td>
-                                <td class="py-2 px-4 border">{{ inquiry.city }}</td>
-                                <td class="py-2 px-4 border">{{ inquiry.email }}</td>
-                                <td class="py-2 px-4 border">{{ inquiry.phone }}</td>
-                                <td class="py-2 px-4 border">{{ inquiry.message }}</td>
-                                <td class="py-2 px-4 border">{{ inquiry.created_date }}</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+    <!-- Sidebar -->
+    <aside class="sidebar bg-blue-500 text-white min-h-screen w-64 flex flex-col position-fixed">
+        <div class="p-4">
+            <h1 class="text-3xl font-semibold">Dashboard</h1>
+            <p class="mt-2 text-2xl">{{ user_name }}</p>
         </div>
-    </main>
-    <footer class="fixed bottom-0 left-0 w-full bg-gray-200 py-4">
-        <div class="container mx-auto text-center">
+        <nav class="flex-grow  position-fixed">
+            <ul class="mt-4">
+                <li class="py-2 px-4 hover:bg-blue-600 hover:text-white transition duration-300">
+                    <a href="#">Messages</a>
+                </li>
+                <li class="py-2 px-4 hover:bg-blue-600 hover:text-white transition duration-300">
+                    <a href="#">Cars</a>
+                </li>
+                <li class="py-2 px-4 hover:bg-blue-600 hover:text-white transition duration-300">
+                    <a href="#">History</a>
+                </li>
+                <li class="py-2 px-4 hover:bg-blue-600 hover:text-white transition duration-300">
+                    <a href="#">Bookings</a>
+                </li>
+                <li class="py-2 px-4 hover:bg-blue-600 hover:text-white transition duration-300">
+                    <a href="#">Notifications <span class="bg-red-500 text-white rounded-full px-2 py-1">3</span></a>
+                </li>
+            </ul>
+        </nav>
+        <footer class="p-4 bg-blue-600 text-center">
             <p>&copy; Autowheelrent 2023</p>
-        </div>
-    </footer>
+        </footer>
+    </aside>
+    <main class="flex-content items-center justify-center h-100%">
+        <aside class=" content bg-white py-2 p-4 border rounded-md shadow-md h-150% flex items-center w-full">
+                <section class="mt-1 absolute top-20 left-30 w-100">
+                    <h2 class="text-xl font-semibold mb-4">Bookings</h2>
+                    <ul>
+                        {% for booking in bookings %}
+                        <li class="mb-4 p-4 border rounded-lg shadow-md">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <h3 class="text-lg font-semibold">{{ booking.car }}</h3>
+                                    <p>Pickup: {{ booking.pickup_location }}</p>
+                                    <p>Dropoff: {{ booking.dropoff_location }}</p>
+                                    <p>Booking Date: {{ booking.booking_date }}</p>                                </div>
+                                <div>
+                                    <a href="#" class="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-full mr-2">Cancel</a>
+                                </div>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    <a href="{% url 'booking' %}" class="bg-green-500 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-full mt-4">New Booking</a>
+                </section>   
+        </aside>
+    </main>
+
 </body>
 </html>
