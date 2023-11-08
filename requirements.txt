@@ -2,3 +2,4 @@ django
 django-allauth
 django-ckeditor
 mysqlclient
+pillow
