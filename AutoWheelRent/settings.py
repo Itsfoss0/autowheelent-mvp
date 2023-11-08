@@ -34,6 +34,7 @@ LOGIN_REDIRECT_URL = 'dashboard'
 INSTALLED_APPS = [
     'allauth',
     'booking',
+    'maps',
     'allauth.account',
     'allauth.socialaccount',
     'accounts.apps.AccountsConfig',
@@ -49,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'django_google_maps',
 
     #Providers
     'allauth.socialaccount.providers.facebook',
@@ -97,8 +99,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'autowheelrent',
-        'USER': 'autowheelrent',
-        'PASSWORD': 'autowheelrent@123',
+        'USER': 'root',
+        'PASSWORD': 'root',
         'HOST': 'localhost',
         'PORT': 3306
     }
@@ -159,3 +161,4 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'autowheelrent@gmail.com'
 EMAIL_HOST_PASSWORD = 'autowheetrent123'
 EMAIL_USE_TLS = True
+
